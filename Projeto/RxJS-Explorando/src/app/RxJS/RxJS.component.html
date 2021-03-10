@@ -1,0 +1,19 @@
+<h1>Teste da promese</h1>
+
+<p style="color: blue;">Valores: </p>
+<p>{{ PromeseVar }}</p>
+<p>segundo valor: {{ PromeseVar2 }}</p>
+
+
+<h1>Teste do Observable</h1>
+<p>- Varios valores</p>
+<p>- Sob demanda, precisa do subscribe(Lazy)</p>
+
+
+<p style="color: blue;">Valores: </p>
+<div *ngFor="let item of ObservableVar"  >
+  <p>{{ item }}</p>
+</div>
+
+
+<button class="btn" #varButtom>Click</button>
