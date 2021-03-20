@@ -1,5 +1,9 @@
 # Explorando_RxJS
 
+# dicas 
+
+  - todo evento keyup, tem um which que representa o numero de cada tecla, espaço é 32
+
 
 # Programação Reativa
 
@@ -47,7 +51,7 @@
  </blockquete>
 
 
-# Observables vs Promises - O que não te disseram sobre RxJS
+# Observables vs Promises 
 
 
  - Promises: Encapsuladores de dados também!
@@ -62,8 +66,6 @@
 
     - 
 
-
-
   - Observables: Encapsuladores de dados, aonde você manipula os dados com os métodos do RxJS!
 
     - Trabalha com multiplos valores!
@@ -74,11 +76,9 @@
 
     - Podem ou nãoserem compartilhado.
 
-    - 
+    -  
 
- 
-
-# Observables vs Promises - Cronologia e Cancelamento - O que não te disseram sobre RxJS
+# Observables vs Promises - Cronologia e Cancelamento 
 
  - share deixa o observable compartilhado
 
@@ -118,8 +118,7 @@
 
     </blockquote>
 
-# Subjects e Subscriptions - O que não te disseram sobre RxJS
-
+# Subjects e Subscriptions 
 
  - Subscribe: é uma forma de vc se inscrever em um observable e receber os valores(todo o fluxo dos dados), 
 
@@ -532,6 +531,58 @@
 
   ### bindNodeCallback
 
+  - Transforma em observable os metodos de node que retorna callback
+
+  <blockquote>
+
+    bindNodeCallback(nodeCallback)(1990)
+    .subscribe(
+      v => console.log('Node valor: ',v),
+      err => console.log('Erro: ',err)
+    );    
+
+  </blockquote>
+
+
+# Drag and Drop reativo 
+
+
+  -Operadores de controle de fluxo!
+
+  ### switchMap
+
+  - Desinscreve do outro observable e bota outro para ser inscrito.
+  - Sempre a ultima inscrição que vai esta ativa.
+
+  - Quando ocorrer um evento no 'mouseDown', o 'switchMap' se desinscreve dele, e se inscreve no mouseMove, fica escutando 'mouseMove' até que tenha um 'mouseUp'.   
+
+  <blockquote>
+
+    const card = document.querySelector('.card');
+
+    const mouseDown$ = fromEvent(document, 'mousedown');
+    const mouseUp$ = fromEvent(document, 'mouseup');
+    const mouseMove$ = fromEvent(document, 'mousemove')
+   
+    const draAndDrop$ = mouseDown$.pipe(
+      switchMap(start => mouseMove$.pipe(
+        takeUntil(mouseUp$)
+      ))
+    )    
+
+  </blockquote>
+
+  ### map
+
+  - Pega um valor e tranforma em outra
+
+  <blockquote>
+    
+
+  </blockquote>
+
+  ### mergeMap
+
   - 
 
   <blockquote>
@@ -539,69 +590,174 @@
 
   </blockquote>
 
+  ### ConcatMap
+
+  - 
+
+  <blockquote>
+    
+
+  </blockquote>
+
+  ### ExasthMap
+
+  - 
+
+  <blockquote>
+    
+
+  </blockquote>
+
+  ### delay()
+
+  - Define um valor de delay, passando por parametro!
+
+  <blockquote>
+    
+
+  </blockquote>
+
+  ### merge
+
+  - Une dois strime em um só
+
+  <blockquote>
+
+          merge(
+
+            mouseMove$.pipe(
+              map((e: MouseEvent) => ({
+                x: e.clientX - start.x + start.target.x,
+                y: e.clientY - start.y + start.target.y,
+              })),
+              takeUntil(mouseUp$)
+            ),
+
+            keyUp$.pipe(
+              filter((e: any) => e.which === 32),
+              tap((tecla: any)  => {
+                document.body
+              })
+            )
+          )   
+
+  </blockquote>
+
+  ### filter
+
+  - filtra um observable, caso a condição seja verdadeira
+
+  <blockquote>   
+    filter((e: any) => e.which === 32),
+  </blockquote>
+
+  ### tap
+
+  - para ter um efeito colateral, um outro efeito alem do subscrible!
+
+  - Não afeta o fluxo porq retorna a mesma entrada!
+
+  - serve como debug!
+
+  <blockquote>
+    
+
+  </blockquote>
+
+  ### insertBefore (JS, não é operador)
+
+  - Copia elementos do HTML, dominando o DOM!
+
+  <blockquote>
+    https://www.w3schools.com/jsref/met_node_insertbefore.asp
+
+  </blockquote>
+  
+
+   ### parentNode (JS, não é operador)
+
+  - Obtem um Nó do Nó pai!
+
+  - exemplo e explicação : https://www.w3schools.com/jsref/prop_node_parentnode.asp
+
+  - Mais exemplo e explicação: https://stackoverflow.com/questions/4043327/document-insertbefore-throws-error
+
+  <blockquote>
+
+     const card = document.querySelector('.card');
+    
+     card?.parentNode?.insertBefore(card.cloneNode(true), card)
+
+  </blockquote>
+
+   ### skip(9999)
+
+  - Não o resultado do ultimo observable ir para o submit!
+
+  <blockquote>
+
+      keyUp$.pipe(
+        filter((e: any) => e.which === 32),
+        tap((tecla: any)  => {
+          card?.parentNode?.insertBefore(card.cloneNode(true), card)
+        }),
+        skip(9999)
+
+      )    
+
+  </blockquote>
+
+# 8
 
   ###
 
-  - 
+  -
 
-  <blockquote>
-    
+  -
 
-  </blockquote>
+  <blockquete>
 
-  ###
-
-  - 
-
-  <blockquote>
-    
-
-  </blockquote>
+  </blockquete>
 
   ###
 
-  - 
+  -
 
-  <blockquote>
-    
+  -
 
-  </blockquote>
+  <blockquete>
+
+  </blockquete>
+  
+  ###
+
+  -
+
+  -
+
+  <blockquete>
+
+  </blockquete>
 
   ###
 
-  - 
+  -
 
-  <blockquote>
-    
+  -
 
-  </blockquote>
+  <blockquete>
 
-  ###
-
-  - 
-
-  <blockquote>
-    
-
-  </blockquote>
+  </blockquete>
 
   ###
 
-  - 
+  -
 
-  <blockquote>
-    
+  -
 
-  </blockquote>
+  <blockquete>
 
-  ###
-
-  - 
-
-  <blockquote>
-    
-
-  </blockquote>
+  </blockquete>
 
 
 

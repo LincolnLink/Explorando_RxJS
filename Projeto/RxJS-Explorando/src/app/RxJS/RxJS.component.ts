@@ -1,6 +1,14 @@
-import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { element } from 'protractor';
+import { Component, OnInit } from '@angular/core';
 import {
-  take
+  delay,
+  filter,
+  map,
+  skip,
+  switchMap,
+  take,
+  takeUntil,
+  tap
 } from 'rxjs/operators';
 import {
   AsyncSubject,
@@ -12,6 +20,7 @@ import {
   fromEvent,
   generate,
   interval,
+  merge,
   Observable,
   of,
   range,
@@ -19,8 +28,17 @@ import {
   Subject
 
 } from 'rxjs';
+import { FromEventTarget } from 'rxjs/internal/observable/fromEvent';
 
 
+interface groupdate{
+  x: string,
+  y: string,
+  target: {
+    x: string,
+    y: string
+  }
+}
 
 @Component({
   selector: 'app-RxJS',
@@ -33,13 +51,17 @@ export class RxJSComponent implements OnInit {
   PromeseVar2: string = "";
   ObservableVar: number[] = [];
 
-
+  topEstilo = '';
+  leftEstilo = '';
+  //topEstilo = '';
 
   constructor() { }
 
   ngOnInit() {
 
-    this.OperadoresDeCriacao();
+    this.DragAndDropReativo();
+
+    //this.OperadoresDeCriacao();
     //this.AsyncSubjects();
     //this.ReplaySubjects();
     //this.BehaviorSubject();
@@ -49,6 +71,72 @@ export class RxJSComponent implements OnInit {
     this.testeObservable();
     this.testeObservable3();
     */
+
+  }
+
+
+  DragAndDropReativo(){
+
+     // Quando ocorrer um evento no mouseDown, o switchMap se desinscreve dele
+    // e se inscreve no mouseMove, fica escutando mouseMove até que tenha um mouseUp
+
+    //Pegando o DOM que vai ser manipulado!
+    const card = document.querySelector('.card');
+
+    //Transforma eventos JS em Observable, para ser escutado e manipular com RxJS
+    const mouseDown$ = fromEvent<any>(<FromEventTarget<any>>card, 'mousedown');
+    const mouseUp$ = fromEvent(<FromEventTarget<any>>document, 'mouseup');
+    const mouseMove$ = fromEvent(<FromEventTarget<any>>document, 'mousemove')
+
+    // Dando inicio aos Operadores de União
+    // Concatenando strime
+    const keyUp$ = fromEvent(document, 'keyup');
+
+    const draAndDrop$ = mouseDown$
+    .pipe(
+      map((e:any ) => ({
+
+        x: e.clientX,
+        y: e.clientY,
+        target: {
+          x: e.target.offsetLeft,
+          y: e.target.offsetTop
+        }
+      })),
+      switchMap((start: any ) =>
+
+          // Une dois strime em um só
+          merge(
+
+            mouseMove$.pipe(
+              map((e: MouseEvent) => ({
+                x: e.clientX - start.x + start.target.x,
+                y: e.clientY - start.y + start.target.y,
+              })),
+              takeUntil(mouseUp$)
+            ),
+
+            keyUp$.pipe(
+              filter((e: any) => e.which === 32),
+              tap((tecla: any)  => {
+                card?.parentNode?.insertBefore(card.cloneNode(true), card)
+              }),
+              skip(9999)
+
+            )
+          )
+      )
+    );
+
+    draAndDrop$.pipe(
+      //delay(500)
+    )
+    .subscribe(
+      (val) => {
+        this.topEstilo = `${val.y}px`;
+        this.leftEstilo = `${val.x}px`;
+      }
+    )
 
   }
 
