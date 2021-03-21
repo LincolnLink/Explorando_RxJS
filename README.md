@@ -1,5 +1,13 @@
 # Explorando_RxJS
 
+- Referencia: 
+
+  - Curso: O que não te disseram sobre RxJS
+
+  - Canal: JWDev Treinamentos
+
+  - Link: https://www.youtube.com/watch?v=hrSYyr2sUac&t=1221s&ab_channel=JWDevTreinamentos
+
 # dicas 
 
   - todo evento keyup, tem um which que representa o numero de cada tecla, espaço é 32
