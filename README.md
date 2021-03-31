@@ -715,9 +715,11 @@
 
   </blockquote>
 
-# 8
+# 8 Autocomplete / Typeahead 
 
-  ###
+  - Busca reativa
+
+  ### Deley na digitação
 
   -
 
@@ -727,7 +729,7 @@
 
   </blockquete>
 
-  ###
+  ### Guardar resultados
 
   -
 
@@ -737,9 +739,9 @@
 
   </blockquete>
   
-  ###
+  ### Cancelar a anterior e buscar a nova
 
-  -
+  - O switchMap resolve isso, faz uma nova requiição e ignora o valor antigo(anterior).
 
   -
 

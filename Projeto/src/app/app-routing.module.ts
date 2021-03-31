@@ -4,12 +4,16 @@ import { Routes, RouterModule } from '@angular/router';
 const routes: Routes = [
 
    {
-    path: '', pathMatch: 'full', redirectTo: 'rxjs'
+    path: '', pathMatch: 'full', redirectTo: 'autoComplete'
    },
    {
      path: 'rxjs',
      loadChildren: () => import('./RxJS/RxJS.module').then(m => m.RxJSModule)
-   }
+   },
+   {
+    path: 'autoComplete',
+    loadChildren: () => import('./auto-complite/module/auto-complite.module').then(a => a.AutoCompliteModule)
+  }
 
 ];
 

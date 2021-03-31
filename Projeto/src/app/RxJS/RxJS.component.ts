@@ -59,7 +59,9 @@ export class RxJSComponent implements OnInit {
 
   ngOnInit() {
 
-    this.DragAndDropReativo();
+    this.AutocompleteTypeahead();
+
+    //this.DragAndDropReativo();
 
     //this.OperadoresDeCriacao();
     //this.AsyncSubjects();
@@ -71,6 +73,13 @@ export class RxJSComponent implements OnInit {
     this.testeObservable();
     this.testeObservable3();
     */
+
+  }
+
+  AutocompleteTypeahead(){
+
+
+
 
   }
 

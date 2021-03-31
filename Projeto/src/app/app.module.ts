@@ -8,11 +8,13 @@ import { HttpClientModule } from '@angular/common/http';
 
 import { CollapseModule } from 'ngx-bootstrap/collapse';
 import { ModalModule } from 'ngx-bootstrap/modal';
+import { AutoCompliteComponent } from './auto-complite/auto-complite.component';
 
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+
    ],
   imports: [
     BrowserModule,
