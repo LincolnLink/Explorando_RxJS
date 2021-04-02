@@ -34,6 +34,8 @@ export class AutoCompliteComponent implements OnInit {
   }
 
 
+
+
   metodoDOM(){
     // Entrada de dados
     const input = fromEvent<any>(<FromEventTarget<any>>document, 'input');

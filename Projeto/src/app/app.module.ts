@@ -9,11 +9,13 @@ import { HttpClientModule } from '@angular/common/http';
 import { CollapseModule } from 'ngx-bootstrap/collapse';
 import { ModalModule } from 'ngx-bootstrap/modal';
 import { AutoCompliteComponent } from './auto-complite/auto-complite.component';
+import { ConcorrenciaComponent } from './concorrencia/concorrencia.component';
 
 
 @NgModule({
   declarations: [
     AppComponent,
+
 
    ],
   imports: [
