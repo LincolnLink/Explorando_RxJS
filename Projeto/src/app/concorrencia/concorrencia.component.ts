@@ -2,8 +2,9 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { ajax } from 'rxjs/ajax';
-import { of } from 'rxjs';
-import { combineAll, concatMap, exhaustMap, mergeMap, pluck, switchMap } from 'rxjs/operators';
+import { fromEvent, of, race } from 'rxjs';
+import { combineAll, concatMap, exhaustMap, mergeMap, pluck, switchMap, tap } from 'rxjs/operators';
+import { FromEventTarget } from 'rxjs/internal/observable/fromEvent';
 
 @Component({
   selector: 'app-concorrencia',
@@ -12,14 +13,68 @@ import { combineAll, concatMap, exhaustMap, mergeMap, pluck, switchMap } from 'r
 })
 export class ConcorrenciaComponent implements OnInit {
 
+  innerHTMLText: string = ''
+  textContent: boolean = true;
+  ativo: boolean = true;
+
   constructor(private http: HttpClient) { }
 
   ngOnInit(): void {
 
+    this.exemploCancelando();
 
-
-    this.exemplos();
+    //this.exemplos();
   }
+
+
+  exemploCancelando(){
+
+    const api = (response: any, delay: any) =>
+    ajax({
+      url: `http://127.0.0.1:5200/response/${JSON.stringify(response)}/delay/${delay}/`
+    });
+
+
+    // Pegando os elementos!
+    const content = document.querySelector('#content');
+    const buttomElementStopRequest = document.querySelector('#b1');
+    const buttomElementRquest = document.querySelector('#b2');
+
+    // Escutando os eventos dos elementos!
+    const buttomRequest$ = fromEvent<any>
+    (<FromEventTarget<any>>buttomElementRquest, 'click');
+
+    const buttomStopRequest$ = fromEvent<any>
+    (<FromEventTarget<any>>buttomElementStopRequest, 'click');
+
+    const request = api({data: 'Resposta da API!'}, 3000).pipe(
+      pluck('response', 'data'),
+      tap(response => this.innerHTMLText = response)
+    );
+
+    const stopResquet = buttomStopRequest$.pipe(
+      tap(() =>  (this.innerHTMLText = 'Requisição Cancelada', this.textContent = false))
+    )
+
+    // const requesting = (bool: boolean) => {
+    //   bool ? 'display: none': 'display: block';
+    //   bool ? 'display: block': 'display: none';
+    // }
+
+    buttomRequest$.pipe(
+
+      tap(() => {
+        this.ativo = false
+        this.innerHTMLText = 'Carregando...';
+      }),
+      switchMap(() => race(request, stopResquet)),
+      tap(() => this.ativo = true)
+
+
+    ).subscribe();
+
+  }
+
 
   exemplos(){
 

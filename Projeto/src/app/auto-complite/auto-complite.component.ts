@@ -22,8 +22,6 @@ import {
 export class AutoCompliteComponent implements OnInit {
 
 
-
-
   constructor() { }
 
   ngOnInit(): void {

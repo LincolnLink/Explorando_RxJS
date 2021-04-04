@@ -1,1 +1,15 @@
+<div class="container1">
 
+  <button [style.display]="ativo ? 'none' : 'block'"
+  id=b1 class="waves-effect waves-light btn red" style="display: none;">
+    Parar Request
+  </button>
+  <button [style.display]="ativo ? 'block' : 'none'"
+  #btn2 id="b2" class=" waves-effect waves-light btn">
+    Fazer Request
+    <i class="material-icons right">send</i>
+  </button>
+  <div [style.Color]="textContent ? '#fafafa' : 'red'" id="content">
+    {{ innerHTMLText }}
+  </div>
+</div>
