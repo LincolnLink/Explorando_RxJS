@@ -292,7 +292,7 @@
 
   - BehaviorSubjects: inicia com um valor, e sempre mantem o valor para ser emitido a qualquer outro subscript.
 
-  ### BehaviorSubjects
+  - BehaviorSubjects
 
     <blockquote>
 
@@ -346,7 +346,7 @@
     </blockquote>
 
 
-  ### ReplaySubjects
+  - ReplaySubjects
 
     - ReplaySubjects: Armazena uma quantidade definida de valores emitidos.
 
@@ -382,7 +382,7 @@
 
     - Serve para gerar Cache.
 
-  ### AsyncSubjects
+  - AsyncSubjects
 
     - AsyncSubjects: Ele só recebe a ultima emição do subject, e só quando o subject for completado!
 
