@@ -290,10 +290,9 @@
 
 # BehaviorSubjects, AsyncSubjects e ReplaySubjects
 
+  - BehaviorSubjects: inicia com um valor, e sempre mantem o valor para ser emitido a qualquer outro subscript.
 
-  ### BehaviorSubjects: inicia com um valor, e sempre mantem o valor para ser emitido a qualquer outro subscript.
-
-  - BehaviorSubjects
+  ### BehaviorSubjects
 
     <blockquote>
 
@@ -315,13 +314,13 @@
       
     </blockquote>
 
-  - Mantem o estado e tem sempre o ultimo valor, ele sempre a tualiza o iltimo valor que foi emitido.
+    - Mantem o estado e tem sempre o ultimo valor, ele sempre a tualiza o iltimo valor que foi emitido.
 
-  - Sendo uma nova ou antiga inscrição(subscribe).
+    - Sendo uma nova ou antiga inscrição(subscribe).
 
     <blockquote>
 
-       const sub = new BehaviorSubject(0);
+        const sub = new BehaviorSubject(0);
 
         sub.next(1);
         sub.next(2);
@@ -347,11 +346,11 @@
     </blockquote>
 
 
-  - ReplaySubjects
+  ### ReplaySubjects
 
-   ### ReplaySubjects: Armazena uma quantidade definida de valores emitidos.
+    - ReplaySubjects: Armazena uma quantidade definida de valores emitidos.
 
-   - E informa quantos valores emitidos, para ele propagar, quando ela se inscrever.
+    - E informa quantos valores emitidos, para ele propagar, quando ela se inscrever.
 
     <blockquote>
 
@@ -379,45 +378,43 @@
 
     </blockquote>
 
+    - Pode passar um segundo parametro, que define o tempo de deração do armazenamento.
 
-  - Pode passar um segundo parametro, que define o tempo de deração do armazenamento
-
-  - Serve para gerar Cache!
-
-
- - AsyncSubjects: Ele só recebe a ultima emição do subject, e só quando o subject for completado!
+    - Serve para gerar Cache.
 
   ### AsyncSubjects
-  
-  <blockquote>
 
-    const sub = new AsyncSubject();
+    - AsyncSubjects: Ele só recebe a ultima emição do subject, e só quando o subject for completado!
 
-    sub.next(1);
-    sub.next(2);
-    sub.next(3);
-    sub.next(4);
+    <blockquote>
 
-    sub.subscribe({
-      next: num => console.log('Observable 1: ', num),
-      error: err => console.log('erro: ',err),
-      complete: () => console.log('Completado')
-    });
+      const sub = new AsyncSubject();
 
-    sub.next(5);
-    sub.next(6);
+      sub.next(1);
+      sub.next(2);
+      sub.next(3);
+      sub.next(4);
 
-    setTimeout(() => {
       sub.subscribe({
-        next: num => console.log('Observable 2: ', num),
+        next: num => console.log('Observable 1: ', num),
         error: err => console.log('erro: ',err),
         complete: () => console.log('Completado')
       });
-    }, 400);
 
-    sub.complete();
-    
-  </blockquote>
+      sub.next(5);
+      sub.next(6);
+
+      setTimeout(() => {
+        sub.subscribe({
+          next: num => console.log('Observable 2: ', num),
+          error: err => console.log('erro: ',err),
+          complete: () => console.log('Completado')
+        });
+      }, 400);
+
+      sub.complete();
+      
+    </blockquote>
 
 
 # Operadores de criação
@@ -690,7 +687,7 @@
   - Copia elementos do HTML, dominando o DOM!
 
   <blockquote>
-  
+
     https://www.w3schools.com/jsref/met_node_insertbefore.asp
 
   </blockquote>
