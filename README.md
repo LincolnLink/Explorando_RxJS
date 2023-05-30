@@ -38,6 +38,7 @@
  - Tem para varias linguagens de programação!
 
  <blockquete>
+
     const pessoas: any[] = [
       { nome: 'João', sexo: 'masculino', idade: 18},
       { nome: 'José', sexo: 'masculino', idade: 32},
@@ -56,6 +57,7 @@
 
 
     maioresAgrupadosPorGenero(pessoas)
+
  </blockquete>
 
 
@@ -183,6 +185,7 @@
  ### se desinscrevendo , nem o erro e nem o complete é executado
 
  <blockquote>
+
     let sub = observerVar.subscribe({
 
       next: num => console.log('Observable: ', num),
@@ -192,6 +195,7 @@
     });
 
     setTimeout(() => sub.unsubscribe(), 3000);
+
  </blockquote>
 
  ### Pode unir as 2 subinscrição para que no final se desinscrever das duas, e pode desunir usando o remove()
@@ -218,6 +222,7 @@
     //sub1.remove(sub2);
 
     setTimeout(() => sub1.unsubscribe(), 3000);
+
  </blockquote>
 
  ### Subjects 
@@ -229,6 +234,7 @@
  - Ele emite valor independente se existe um subscrible
 
  <blockquote>
+
    testeSubjects1(){
 
     const sub = new Subject();
@@ -253,6 +259,7 @@
     sub.complete();
 
   }
+
  </blockquote>
 
   - Passando um subject, para ser executado dentro de um Observable!
@@ -278,6 +285,7 @@
     );
 
     const subscription = obs.subscribe(sub);
+
   </blockquote>
 
 # BehaviorSubjects, AsyncSubjects e ReplaySubjects
@@ -312,6 +320,7 @@
   - Sendo uma nova ou antiga inscrição(subscribe).
 
     <blockquote>
+
        const sub = new BehaviorSubject(0);
 
         sub.next(1);
@@ -334,6 +343,7 @@
           error: err => console.log('erro: ',err),
           complete: () => console.log('Completado')
         });
+        
     </blockquote>
 
 
@@ -478,6 +488,7 @@
   - parece que o for, só que em forma de função
 
   <blockquote>
+
     generate(0, x => x < 10, x => x + 1)
     .subscribe(
       v => console.log("Valor do generete: ", v)
@@ -507,6 +518,7 @@
   - emite valor com condição usando function
 
   <blockquote>
+
      const a = (a: number)=> defer(() =>{
       return a > 10? of(1): of(2)
     })
@@ -526,6 +538,7 @@
     o CB cai no subscribe e é executado!
 
   <blockquote>
+
      const testeCallback = (a: any, cb: any) => {
       cb(a);
     }
@@ -677,6 +690,7 @@
   - Copia elementos do HTML, dominando o DOM!
 
   <blockquote>
+  
     https://www.w3schools.com/jsref/met_node_insertbefore.asp
 
   </blockquote>
